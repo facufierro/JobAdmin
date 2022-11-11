@@ -1,8 +1,6 @@
-from django.conf import settings
-from django.conf.urls.static import static
 from django.urls import path
-from jobmanager import views
+from . import views
 
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='index'),
+    path('', views.HomePageView.as_view(), name='home'),
 ]

@@ -3,6 +3,5 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView,
 from django.urls import reverse_lazy
 
 
-class IndexView(TemplateView):
-    template_name = 'index.html'
-    
+class HomePageView(TemplateView):
+    template_name = 'home.html'

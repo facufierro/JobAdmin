@@ -32,3 +32,23 @@ class RegisterView(SuccessMessageMixin, CreateView):
         if self.request.user.is_authenticated:
             return reverse_lazy('home')
         return super(RegisterView, self).get(*args, **kwargs)
+
+
+class ProfileView(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = 'profile.html'
+    context_object_name = 'user'
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+
+class UpdateProfileView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = User
+    template_name = 'update_profile.html'
+    fields = ['username', 'first_name', 'last_name', 'email']
+    success_url = reverse_lazy('profile')
+    success_message = "Profile updated successfully"
+
+    def get_object(self, queryset=None):
+        return self.request.user

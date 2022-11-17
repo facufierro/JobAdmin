@@ -7,3 +7,7 @@ from .models import Job, JobType
 
 class HomePageView(TemplateView):
     template_name = 'base/home.html'
+
+
+class AboutPageView(TemplateView):
+    template_name = 'base/about.html'

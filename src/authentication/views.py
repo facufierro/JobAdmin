@@ -12,17 +12,17 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 
 class LoginView(LoginView):
-    template_name = 'login.html'
+    template_name = 'authentication/login.html'
     next_page = reverse_lazy("home")
 
 
 class LogoutView(LogoutView):
-    template_name = 'logout.html'
+    template_name = 'authentication/logout.html'
 
 
 class RegisterView(SuccessMessageMixin, CreateView):
     model = User
-    template_name = 'register.html'
+    template_name = 'authentication/register.html'
     form_class = UserCreationForm
     redirect_authenticated_user = True
     success_url = reverse_lazy('login')
@@ -36,7 +36,7 @@ class RegisterView(SuccessMessageMixin, CreateView):
 
 class ProfileView(LoginRequiredMixin, DetailView):
     model = User
-    template_name = 'profile.html'
+    template_name = 'authentication/profile.html'
     context_object_name = 'user'
 
     def get_object(self, queryset=None):
@@ -45,7 +45,7 @@ class ProfileView(LoginRequiredMixin, DetailView):
 
 class UpdateProfileView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = User
-    template_name = 'update_profile.html'
+    template_name = 'authentication/update_profile.html'
     fields = ['username', 'first_name', 'last_name', 'email']
     success_url = reverse_lazy('profile')
     success_message = "Profile updated successfully"

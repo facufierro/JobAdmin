@@ -1,0 +1,11 @@
+{% extends 'base/navbar.html' %} {% block content %}
+<form method="POST">
+  {% csrf_token %}
+  <p>¿Are you sure you want to delete {{ object.nombre }}?</p>
+  <p>The changes are permanent.</p>
+  {% comment %} link accept {% endcomment %}
+  <button type="submit" class="btn btn-danger">Delete</button>
+  {% comment %} link cancel {% endcomment %}
+  <a href="{% url 'job_index' %}">Back</a>
+</form>
+{% endblock content %}

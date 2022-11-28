@@ -1,0 +1,16 @@
+{% extends 'base/navbar.html' %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Please fill all the relevant fields</h2>
+      <form action="" method="post">
+        {% csrf_token %} {{ form.as_p }} {% comment %} add a link to create job type next to field {% endcomment %}
+        <a href="{% url 'job_type_create' %}">Add a new job type</a>
+        <input type="submit" value="Submit" class="btn btn-primary" />
+        <input type="reset" value="Reset" class="btn btn-default" />
+        <a href="{% url 'home' %}" class="btn btn-default">Cancel</a>
+      </form>
+    </div>
+  </div>
+  {% endblock content %}
+</div>

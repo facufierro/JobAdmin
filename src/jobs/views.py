@@ -48,10 +48,10 @@ class JobTypeIndexView(ListView):
     model = JobType
     template_name = 'jobs/index.html'
 
-
 class JobTypeDetailView(DetailView):
     model = JobType
     template_name = 'jobs/detail.html'
+    
 
 
 class JobTypeCreateView(CreateView):

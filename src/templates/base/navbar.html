@@ -4,13 +4,40 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Job administration website"/>
+    <meta name="keywords" content="JOBS, EMPLOYMENT"/>
     <title>JobAdmin</title>
   </head>
   <body>
     <ul>
-      <li><a href="{% url 'home' %}">JobAdmin</a></li>
-      <li><a href="{% url 'job_type_index'%}">JobTypes</a></li>
-      {% for job_type in job_types %} {% endfor %}
+      <li>
+        <a href="{% url 'home' %}">Home</a>
+      </li>
+      {% if user.is_authenticated %}
+        {% if user.is_superuser %}
+          <li>
+            <a href="#">Employees</a>
+          </li>
+          <li>
+            <a href="{% url 'job_index' %}">Jobs</a>
+          </li>
+        {% else %}
+          {% block user_navbar %}
+          {% endblock user_navbar %}
+        {% endif %}
+        <li>
+          You are logged as <a href="#">{{ user.username }}</a>
+        </li>
+        <li>
+          <a href="{% url 'user_logout' %}">Logout</a>
+        </li>
+      {% else %}
+        <li>
+          <a href="{% url 'user_login' %}">Login</a>
+        </li>
+      {% endif %}
     </ul>
+    {% block content %}
+    {% endblock content %}
   </body>
 </html>

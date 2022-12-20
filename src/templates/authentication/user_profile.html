@@ -1,0 +1,11 @@
+{% extends "base/navbar.html" %}
+{% block content %}
+  <ul>
+    <li>Name: {{ user.first_name }}</li>
+    <li>Last Name: {{ user.last_name }}</li>
+    <li>Email: {{ user.email }}</li>
+    <li>Username: {{ user.username }}</li>
+    <li>Address: {{ user.address }}</li>
+  </ul>
+  <a href="{% url 'user_update' user.id %}">Modify Profile</a>
+{% endblock content %}

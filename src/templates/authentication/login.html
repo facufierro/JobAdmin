@@ -1,7 +1,0 @@
-{% extends 'base/navbar.html' %} {% block content %}
-<form method="POST">
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit">Iniciar Sesión</button>
-</form>
-<a href="{% url 'register' %}">Don't have an account?</a>
-{% endblock content %}

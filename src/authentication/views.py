@@ -1,8 +1,11 @@
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic import CreateView
+
 from .forms import CustomUserCreationForm
+
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from .models import CustomUser
 
 
 class UserLoginView(LoginView):
@@ -20,3 +23,28 @@ class UserRegisterView(SuccessMessageMixin, CreateView):
     success_url = reverse_lazy("user_login")
     template_name = "authentication/user_register.html"
     success_message = "Account created successfully"
+
+
+class UserIndexView(ListView):
+    model = CustomUser
+    template_name = "authentication/user_index.html"
+    context_object_name = "users"
+
+
+class UserProfileView(DetailView):
+    model = CustomUser
+    template_name = "authentication/user_profile.html"
+    context_object_name = "user"
+
+
+class UserUpdateView(UpdateView):
+    model = CustomUser
+    template_name = "authentication/user_update.html"
+    fields = ["email", "first_name", "last_name"]
+    success_url = reverse_lazy("user_index")
+
+
+class UserDeleteView(DeleteView):
+    model = CustomUser
+    template_name = "authentication/user_delete.html"
+    success_url = reverse_lazy("user_index")

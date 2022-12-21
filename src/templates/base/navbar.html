@@ -16,15 +16,16 @@
       {% if user.is_authenticated %}
         {% if user.is_superuser %}
           <li>
-            <a href="#">Employees</a>
+            <a href="{% url 'user_index' %}">Employees</a>
           </li>
           <li>
             <a href="{% url 'job_index' %}">Jobs</a>
           </li>
         {% else %}
-          {% block user_navbar %}
-          {% endblock user_navbar %}
-        {% endif %}
+          <li>
+            <a href="{% url 'job_index' %}">Jobs</a>
+          </li>
+        {% endif %}'
         <li>
           You are logged as <a href="#">{{ user.username }}</a>
         </li>
@@ -36,6 +37,9 @@
           <a href="{% url 'user_login' %}">Login</a>
         </li>
       {% endif %}
+      <li>
+        <a href="{% url 'about' %}">About Us</a>
+      </li>
     </ul>
     {% block content %}
     {% endblock content %}

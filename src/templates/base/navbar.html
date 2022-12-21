@@ -9,38 +9,20 @@
     <title>JobAdmin</title>
   </head>
   <body>
-    <ul>
-      <li>
-        <a href="{% url 'home' %}">Home</a>
-      </li>
-      {% if user.is_authenticated %}
-        {% if user.is_superuser %}
-          <li>
-            <a href="{% url 'user_index' %}">Employees</a>
-          </li>
-          <li>
-            <a href="{% url 'job_index' %}">Jobs</a>
-          </li>
-        {% else %}
-          <li>
-            <a href="{% url 'job_index' %}">Jobs</a>
-          </li>
-        {% endif %}'
-        <li>
-          You are logged as <a href="#">{{ user.username }}</a>
-        </li>
-        <li>
-          <a href="{% url 'user_logout' %}">Logout</a>
-        </li>
+    <a href="{% url 'home' %}">Home</a>
+    <a href="{% url 'about' %}">About Us</a>
+    {% if user.is_authenticated %}
+      {% if user.is_superuser %}
+        <a href="{% url 'user_index' %}">Employees</a>
+        <a href="{% url 'job_index' %}">Jobs</a>
       {% else %}
-        <li>
-          <a href="{% url 'user_login' %}">Login</a>
-        </li>
+        <a href="{% url 'job_index' %}">Jobs</a>
       {% endif %}
-      <li>
-        <a href="{% url 'about' %}">About Us</a>
-      </li>
-    </ul>
+      <a href="{% url 'user_profile' user.id %}">{{ user.username }}' Profile</a>
+      <a href="{% url 'user_logout' %}">Logout</a>
+    {% else %}
+      <a href="{% url 'user_login' %}">Login</a>
+    {% endif %}
     {% block content %}
     {% endblock content %}
   </body>

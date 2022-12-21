@@ -1,5 +1,5 @@
 from django.db import models
-from authentication.models import custom_user
+from users.models import custom_user
 
 
 class job_type(models.Model):

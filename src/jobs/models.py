@@ -1,12 +1,8 @@
 from django.db import models
-
-# import customuser
-from authentication.models import CustomUser
-
-# Create your models here.
+from authentication.models import custom_user
 
 
-class JobType(models.Model):
+class job_type(models.Model):
     id = models.AutoField(primary_key=True)
     job_type = models.CharField(max_length=100)
 
@@ -14,24 +10,33 @@ class JobType(models.Model):
         return self.job_type
 
 
-class Job(models.Model):
+class job(models.Model):
     id = models.AutoField(primary_key=True)
-    title = models.CharField(max_length=100)
-    description = models.CharField(max_length=200)
-    job_type = models.ForeignKey(JobType, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    job_type = models.ForeignKey(job_type, on_delete=models.CASCADE)
+    users = models.ManyToManyField(custom_user, through="job_user")
+    job_name = models.CharField(max_length=100)
+    job_description = models.CharField(max_length=1000)
+    job_location = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.title
+        return self.job_name
 
 
-class WorkedHour(models.Model):
+class job_user(models.Model):
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    job = models.ForeignKey(job, on_delete=models.CASCADE)
+    user = models.ForeignKey(custom_user, on_delete=models.CASCADE)
+    rate = models.DecimalField(default=0, max_digits=5, decimal_places=2)
+
+    def __str__(self):
+        return self.user.username
+
+
+class worked_hour(models.Model):
+    id = models.AutoField(primary_key=True)
+    job_user = models.ForeignKey(job_user, on_delete=models.CASCADE)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
 
     def __str__(self):
-        return self.employee.name + " - " + self.job.title + " - " + str(self.hours)
+        return self.job_user.user.username

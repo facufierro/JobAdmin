@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView, TemplateView, TemplateView
 
 from django.urls import reverse_lazy
-from .models import Job, JobType, WorkedHour
+from .models import job, job_type, worked_hour, job_user
 
 
 class HomePageView(TemplateView):
@@ -14,85 +14,85 @@ class AboutPageView(TemplateView):
 
 
 class JobIndexView(ListView):
-    model = Job
+    model = job
     template_name = "jobs/job_index.html"
     context_object_name = "jobs"
 
 
 class JobDetailView(DetailView):
-    model = Job
+    model = job
     template_name = "jobs/detail.html"
 
 
 class JobCreateView(CreateView):
-    model = Job
+    model = job
     template_name = "jobs/create.html"
     fields = ["title", "description", "job_type"]
     success_url = reverse_lazy("job_index")
 
 
 class JobUpdateView(UpdateView):
-    model = Job
+    model = job
     template_name = "jobs/update.html"
     fields = ["title", "description", "job_type"]
     success_url = reverse_lazy("job_index")
 
 
 class JobDeleteView(DeleteView):
-    model = Job
+    model = job
     template_name = "jobs/delete.html"
     success_url = reverse_lazy("job_index")
 
 
 class JobTypeIndexView(ListView):
-    model = JobType
+    model = job_type
     template_name = "jobs/job_index.html"
 
 
 class JobTypeDetailView(DetailView):
-    model = JobType
+    model = job_type
     template_name = "jobs/detail.html"
 
 
 class JobTypeCreateView(CreateView):
-    model = JobType
+    model = job_type
     template_name = "jobs/create.html"
     fields = ["job_type"]
     success_url = reverse_lazy("job_type_index")
 
 
 class JobTypeUpdateView(UpdateView):
-    model = JobType
+    model = job_type
     template_name = "jobs/update.html"
     fields = ["job_type"]
     success_url = reverse_lazy("job_type_index")
 
 
 class JobTypeDeleteView(DeleteView):
-    model = JobType
+    model = job_type
     template_name = "jobs/delete.html"
     success_url = reverse_lazy("job_type_index")
 
 
 class WorkedHourIndexView(ListView):
-    model = WorkedHour
+    model = worked_hour
     template_name = "jobs/job_index.html"
 
 
 class WorkedHourDetailView(DetailView):
-    model = WorkedHour
+    model = worked_hour
     template_name = "jobs/detail.html"
 
 
 class WorkedHourCreateView(CreateView):
-    model = WorkedHour
+    model = worked_hour
     template_name = "jobs/create.html"
     fields = ["employee", "job", "hours_worked"]
     success_url = reverse_lazy("worked_hour_index")
 
 
 class WorkedHourUpdateView(UpdateView):
-    model = WorkedHour
+    model = worked_hour
     template_name = "jobs/update.html"
     fields = ["employee", "job", "hours_worked"]
     success_url = reverse_lazy("worked_hour_index")

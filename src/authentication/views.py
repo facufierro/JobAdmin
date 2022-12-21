@@ -5,7 +5,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from .forms import CustomUserCreationForm
 
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
-from .models import CustomUser
+from .models import custom_user
 
 
 class UserLoginView(LoginView):
@@ -26,25 +26,25 @@ class UserRegisterView(SuccessMessageMixin, CreateView):
 
 
 class UserIndexView(ListView):
-    model = CustomUser
+    model = custom_user
     template_name = "authentication/user_index.html"
     context_object_name = "users"
 
 
 class UserProfileView(DetailView):
-    model = CustomUser
+    model = custom_user
     template_name = "authentication/user_profile.html"
     context_object_name = "user"
 
 
 class UserUpdateView(UpdateView):
-    model = CustomUser
+    model = custom_user
     template_name = "authentication/user_update.html"
     fields = ["email", "first_name", "last_name"]
     success_url = reverse_lazy("user_index")
 
 
 class UserDeleteView(DeleteView):
-    model = CustomUser
+    model = custom_user
     template_name = "authentication/user_delete.html"
     success_url = reverse_lazy("user_index")

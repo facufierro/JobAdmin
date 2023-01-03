@@ -4,7 +4,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 # import mixin to check if user is logged in
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from .models import job, job_type, worked_hour, job_user
+from .models import job, job_type
 
 
 class HomePageView(TemplateView):

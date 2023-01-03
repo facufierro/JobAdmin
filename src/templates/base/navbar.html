@@ -12,10 +12,11 @@
     <a href="{% url 'home' %}">Home</a>
     {% if user.is_authenticated %}
       <a href="{% url 'user_logout' %}">Logout</a>
-      {% block admin_navbar_content %}
-      {% endblock admin_navbar_content %}
-      {% block user_navbar_content %}
-      {% endblock user_navbar_content %}
+      {% if user.is_superuser %}
+        {% include "base/admin_navbar.html" %}
+      {% else %}
+        {% include "base/user_navbar.html" %}
+      {% endif %}
     {% else %}
       <a href="{% url 'user_login' %}">Login</a>
       <a href="{% url 'user_register' %}">Register</a>

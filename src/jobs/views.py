@@ -15,62 +15,67 @@ class AboutPageView(TemplateView):
     template_name = "base/about.html"
 
 
-class JobIndexView(ListView, LoginRequiredMixin):
+class JobIndexView(ListView):
     model = job
     template_name = "jobs/job_index.html"
     context_object_name = "jobs"
 
 
-class JobDetailView(DetailView, LoginRequiredMixin):
+class JobDetailView(DetailView):
     model = job
-    template_name = "jobs/detail.html"
+    template_name = "jobs/job_detail.html"
+    context_object_name = "job"
 
 
-class JobCreateView(CreateView, LoginRequiredMixin):
+class JobCreateView(LoginRequiredMixin, CreateView):
     model = job
-    template_name = "jobs/create.html"
-    fields = ["title", "description", "job_type"]
+    template_name = "jobs/job_create.html"
+    fields = ["name", "description", "start_date", "end_date", "job_type_id", "users"]
     success_url = reverse_lazy("job_index")
 
 
-class JobUpdateView(UpdateView, LoginRequiredMixin):
+class JobUpdateView(LoginRequiredMixin, UpdateView):
     model = job
-    template_name = "jobs/update.html"
-    fields = ["title", "description", "job_type"]
+    template_name = "jobs/job_edit.html"
+    fields = ["name", "description", "start_date", "end_date", "job_type_id", "users"]
     success_url = reverse_lazy("job_index")
 
 
-class JobDeleteView(DeleteView, LoginRequiredMixin):
+class JobDeleteView(LoginRequiredMixin, DeleteView):
     model = job
-    template_name = "jobs/delete.html"
+    template_name = "jobs/job_delete.html"
+    context_object_name = "job"
     success_url = reverse_lazy("job_index")
 
 
-class JobTypeIndexView(ListView, LoginRequiredMixin):
+class JobTypeIndexView(ListView):
     model = job_type
     template_name = "jobs/job_index.html"
+    context_object_name = "job_types"
 
 
-class JobTypeDetailView(DetailView, LoginRequiredMixin):
+class JobTypeDetailView(DetailView):
     model = job_type
-    template_name = "jobs/detail.html"
+    template_name = "jobs/job_detail.html"
+    context_object_name = "job_type"
 
 
-class JobTypeCreateView(CreateView, LoginRequiredMixin):
+class JobTypeCreateView(LoginRequiredMixin, CreateView):
     model = job_type
-    template_name = "jobs/create.html"
-    fields = ["job_type"]
-    success_url = reverse_lazy("job_type_index")
+    template_name = "jobs/job_create.html"
+    fields = ["name"]
+    success_url = reverse_lazy("job_index")
 
 
-class JobTypeUpdateView(UpdateView, LoginRequiredMixin):
+class JobTypeUpdateView(LoginRequiredMixin, UpdateView):
     model = job_type
-    template_name = "jobs/update.html"
-    fields = ["job_type"]
-    success_url = reverse_lazy("job_type_index")
+    template_name = "jobs/job_edit.html"
+    fields = ["name"]
+    success_url = reverse_lazy("job_index")
 
 
-class JobTypeDeleteView(DeleteView, LoginRequiredMixin):
+class JobTypeDeleteView(LoginRequiredMixin, DeleteView):
     model = job_type
-    template_name = "jobs/delete.html"
-    success_url = reverse_lazy("job_type_index")
+    template_name = "jobs/job_delete.html"
+    context_object_name = "job_type"
+    success_url = reverse_lazy("job_index")

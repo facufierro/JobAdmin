@@ -1,4 +1,4 @@
-{% extends "base/navbar.html" %}
+{% extends "base/user_navbar.html" %}
 {% load static %}
 {% block content %}
     <div class="container">
@@ -21,17 +21,19 @@
                             </thead>
                             <tbody>
                                 {% for user in users %}
-                                    <tr>
-                                        <th scope="row">{{ user.id }}</th>
-                                        <td>{{ user.username }}</td>
-                                        <td>{{ user.email }}</td>
-                                        <td>{{ user.address }}</td>
-                                        <td>
-                                            <a href="{% url 'user_profile' user.id %}" class="btn btn-primary">View</a>
-                                            <a href="{% url 'user_update' user.id %}" class="btn btn-success">Update</a>
-                                            <a href="{% url 'user_delete' user.id %}" class="btn btn-danger">Delete</a>
-                                        </td>
-                                    </tr>
+                                    {% if not user.is_superuser %}
+                                        <tr>
+                                            <th scope="row">{{ user.id }}</th>
+                                            <td>{{ user.username }}</td>
+                                            <td>{{ user.email }}</td>
+                                            <td>{{ user.address }}</td>
+                                            <td>
+                                                <a href="{% url 'user_profile' user.id %}" class="btn btn-primary">View</a>
+                                                <a href="{% url 'user_update' user.id %}" class="btn btn-success">Update</a>
+                                                <a href="{% url 'user_delete' user.id %}" class="btn btn-danger">Delete</a>
+                                            </td>
+                                        </tr>
+                                    {% endif %}
                                 {% endfor %}
                             </tbody>
                         </table>
@@ -40,4 +42,7 @@
             </div>
         </div>
     </div>
-{% endblock %}
+    {% if user.is_superuser %}
+        <a href="{% url 'user_register' %}">Add Employee</a>
+    {% endif %}
+{% endblock content %}

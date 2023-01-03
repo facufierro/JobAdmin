@@ -10,19 +10,11 @@
   </head>
   <body>
     <a href="{% url 'home' %}">Home</a>
+    {% block admin_navbar_content %}
+    {% endblock admin_navbar_content %}
+    {% block user_navbar_content %}
+    {% endblock user_navbar_content %}
     <a href="{% url 'about' %}">About Us</a>
-    {% if user.is_authenticated %}
-      {% if user.is_superuser %}
-        <a href="{% url 'user_index' %}">Employees</a>
-        <a href="{% url 'job_index' %}">Jobs</a>
-      {% else %}
-        <a href="{% url 'job_index' %}">Jobs</a>
-      {% endif %}
-      <a href="{% url 'user_profile' user.id %}">{{ user.username }}' Profile</a>
-      <a href="{% url 'user_logout' %}">Logout</a>
-    {% else %}
-      <a href="{% url 'user_login' %}">Login</a>
-    {% endif %}
     {% block content %}
     {% endblock content %}
   </body>
